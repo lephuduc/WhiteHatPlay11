@@ -312,7 +312,7 @@ Nhìn icon nên mìn chắc chắn là ông ra đề dùng pyinstaller luôn:)),
 
 ![image](https://user-images.githubusercontent.com/88520787/176371888-8798c18c-f081-4bc2-af6f-b0a70000a9c2.png)
 
-Tiếp tục mình dùng [Nncompyle6](https://github.com/rocky/python-uncompyle6) để uncompyle file `quewridg.pyc` ra thành code python:
+Tiếp tục mình dùng [Uncompyle6](https://github.com/rocky/python-uncompyle6) để uncompyle file `quewridg.pyc` ra thành code python:
 
 ```py
 import base64, os, time
