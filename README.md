@@ -27,7 +27,7 @@ Thử trên cyber chef và bùm:
 
 ![image](https://user-images.githubusercontent.com/88520787/176365683-f833a682-0b13-4e6a-8f7c-ea689e946f3e.png)
 
-Flag: WhiteHat{Whit3H4t11H4v34N1C3D4yR3VeRs31!.Whit3H4t11THISIS4TR4p4YOU?}
+Flag: WhiteHat{Whit3H4t11H4v34N1C3D4yR3VeRs31!}
 
 ## re02-WhiteHatPlay11v2 - 256pts
 
