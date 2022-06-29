@@ -29,7 +29,7 @@ Thử trên cyber chef và bùm:
 
 Flag: WhiteHat{Whit3H4t11H4v34N1C3D4yR3VeRs31!.Whit3H4t11THISIS4TR4p4YOU?}
 
-## re02-
+## re02-WhiteHatPlay11v2 - 256pts
 
 Lần này đề cho mình file dll, tiếp tục check và mở bằng IDA32 lên xem:
 
@@ -290,6 +290,280 @@ for i in range(0,len(x),4):
     for c in t:
         print(chr((c-11)^0x11),end = "") #Whit3H4t11S0L1v34LifeY0uW1llR3memB3r
 ```
-Flag: `WhiteHat{Whit3H4t11S0L1v34LifeY0uW1llR3memB3r@2022}
+Flag: `WhiteHat{Whit3H4t11S0L1v34LifeY0uW1llR3memB3r@2022}`
+
+## re03-startr3 - 32pts
+
+Bài này thì là bài free flag nên là, mở bằng ida64 thấy luôn flag:
+
+![image](https://user-images.githubusercontent.com/88520787/176370995-7ca6fa5e-e820-4fb1-9966-f9b16dc388fe.png)
+
+Flag: `WhiteHat{start_r3_ez_game}`
+
+## re04-Baby RE - 128pts
+
+Đề cho mình 1 file exe như này: 
+
+![image](https://user-images.githubusercontent.com/88520787/176371449-4fff20c9-78e1-423f-b864-b00b94290379.png)
+
+Nhìn icon nên mìn chắc chắn là ông ra đề dùng pyinstaller luôn:)), ngay lập tức mình đi tìm tools để decompile ra:
+
+Đầu tiên mình dùng [Pyinstxtractor](https://github.com/extremecoders-re/pyinstxtractor) để extract file này ra, sau khi extract nó sẽ trông như này:
+
+![image](https://user-images.githubusercontent.com/88520787/176371888-8798c18c-f081-4bc2-af6f-b0a70000a9c2.png)
+
+Tiếp tục mình dùng [Nncompyle6](https://github.com/rocky/python-uncompyle6) để uncompyle file `quewridg.pyc` ra thành code python:
+
+```py
+import base64, os, time
+str1 = []
+str2 = []
+k = None
+h = None
+
+def re():
+    global h
+    global k
+    s = 'VOhEdHV0YIRVVLF0S9'
+    x = '92Mp5GXI5XV79DMO1F'
+    for i in range(len(s)):
+        if i % 2 != 0:
+            str1.append(s[i])
+            str2.append(x[i])
+        else:
+            str1.append(x[i])
+            str2.append(s[i])
+
+    k = ''.join(str1)
+    h = ''.join(str2)
 
 
+def write_1():
+    with open(os.environ['USERPROFILE'] + str(base64.b64decode('XEFwcERhdGFcTG9jYWxcVGVtcFw='), 'utf-8') + k + str(base64.b64decode('LnR4dA=='), 'utf-8'), 'w') as (f):
+        f.write('YmFuIGNvIHRoYXkgY29uIGJhY2ggdHVvYyBrZXUga2hvbmc=')
+    with open(os.environ['USERPROFILE'] + str(base64.b64decode('XEFwcERhdGFcUm9hbWluZ1w='), 'utf-8') + h + str(base64.b64decode('LnR4dA=='), 'utf-8'), 'w') as (f):
+        f.write('dGltIHRodSB4ZW0=')
+
+
+def content():
+    banner = ".__   __.  __    ______   ___   .___________.____    _  _    .___  ___. \n|  \\ |  | /_ |  /      | / _ \\  |           |___ \\  | || |   |   \\/   | \n|   \\|  |  | | |  ,----'| | | | `---|  |----` __) | | || |_  |  \\  /  | \n|  . `  |  | | |  |     | | | |     |  |     |__ <  |__   _| |  |\\/|  | \n|  |\\   |  | | |  `----.| |_| |     |  |     ___) |    | |   |  |  |  | \n|__| \\__|  |_|  \\______| \\___/      |__|    |____/     |_|   |__|  |__|"
+    print(banner)
+    print('=======================================================================================')
+    print('                      https://www.youtube.com/shorts/t1u-h4rlNSY                       ')
+    print('=======================================================================================')
+    time.sleep(5)
+
+
+if __name__ == '__main__':
+    content()
+    re()
+    write_1()
+```
+Sau khi chuyển base64 thành ascii, mình thấy là khi chạy file lên, nó sẽ tạo ra 2 tệp với nội 2 nội dung:
+
+```
+ban co thay con bach tuoc keu khong
+tim thu xem
+```
+
+Và mình để ý là tên của 2 cái file kia cũng là base64:
+
+```py
+def re():
+    global h
+    global k
+    s = 'VOhEdHV0YIRVVLF0S9'
+    x = '92Mp5GXI5XV79DMO1F'
+    for i in range(len(s)):
+        if i % 2 != 0:
+            str1.append(s[i])
+            str2.append(x[i])
+        else:
+            str1.append(x[i])
+            str2.append(s[i])
+
+    k = ''.join(str1)
+    h = ''.join(str2)
+    print(base64.b64decode(h+k+"=").decode())
+re()         #WhiteHat{T1NH_N0NG_NHU_K3M}
+```
+Flag: `WhiteHat{T1NH_N0NG_NHU_K3M}`
+Trong lúc làm bài này nóng thiệt=)), vì rating bài này 1* nên mình cũng không nói gì thêm, next thôi=))
+
+## re05-Lucky Ticket - 64pts
+```
+Find the password of the mystery box
+nc 164.92.81.231 9012
+```
+![image](https://user-images.githubusercontent.com/88520787/176375704-57efd22e-b14b-404e-b726-28c7e9444a74.png)
+
+Sau khi mình chạy file thì nó dừng luôn, thử đưa vào IDA:
+
+![image](https://user-images.githubusercontent.com/88520787/176376052-46441a43-05be-4b29-b81f-a3b1c6ea1129.png)
+
+Ý của bài này là mình có 2 lựa chọn `1: Lucky Ticket`,`2: Mystery Box 600$`, Sau khi kiếm đủ 600$ bằng việc đoán chữ số thì mình sẽ được mở `Mystery Box`:
+
+Đặt breakpoint tại đây và setup debug thôi:)
+
+![image](https://user-images.githubusercontent.com/88520787/176377090-d6a11dff-9bd2-49cd-841b-563d2fa7e890.png)
+
+Tại đây sẽ có lệnh nhảy có điều kiện `jnz` (jump if not zero)
+
+![image](https://user-images.githubusercontent.com/88520787/176377521-e2d87189-12c8-484a-b5cb-1c62c61ec2eb.png)
+
+Mình muốn nhảy vào thì chỉnh lại `ZeroFlag = 0`:
+
+![image](https://user-images.githubusercontent.com/88520787/176377630-612c906a-e01f-4ad3-8328-612d247de5bd.png)
+
+Tới đây các bạn chọn option 2 luôn:
+
+![image](https://user-images.githubusercontent.com/88520787/176377784-5912b29b-7558-430f-9a2e-aaed73b04c7f.png)
+
+![image](https://user-images.githubusercontent.com/88520787/176377836-2d07d817-52b7-4e2c-8531-5d677c95fed8.png)
+
+Còn đây sẽ là đoạn so sánh số tiền hiện tại với 599, nếu lớn hơn thì sẽ nhảy vào chổ mở box, muốn pass qua lệnh này, mình cần chỉnh `OF = SF`:
+
+![image](https://user-images.githubusercontent.com/88520787/176378396-07a5d2c1-c29a-4e22-b4fd-409e49cc6c89.png)
+
+![image](https://user-images.githubusercontent.com/88520787/176378445-8f23aa5d-82e8-4bd9-9eec-48b2344744f8.png)
+
+```c
+__int64 __fastcall open(int a1)
+{
+  __int64 result; // rax
+  _BOOL4 v2; // [rsp+14h] [rbp-9Ch]
+  int v3; // [rsp+18h] [rbp-98h]
+  int v4; // [rsp+1Ch] [rbp-94h]
+  int v5[34]; // [rsp+20h] [rbp-90h] BYREF
+  unsigned __int64 v6; // [rsp+A8h] [rbp-8h]
+
+  v6 = __readfsqword(0x28u);
+  v3 = 3 * a + 5;
+  for ( i = 0; i <= 9; ++i )
+  {
+    v5[i] = (int)(a * keypublic[i] + a1) % v3;
+    printf("%d\n", keypublic[i]);
+  }
+  puts("-----------------------------");
+  puts("\nYour key : ");
+  for ( i = 0; i <= 9; ++i )
+  {
+    __isoc99_scanf("%2d", &v5[i + 12]);
+    putchar(10);
+  }
+  v4 = module_reverse((unsigned int)a);
+  v2 = 0;
+  for ( i = 0; i <= 9; ++i )
+    v5[i + 24] = v4 * (v5[i + 12] - a1) % v3;
+  for ( i = 0; i <= 9; ++i )
+    v2 = v5[i + 24] == keypublic[i];
+  if ( v2 )
+  {
+    printf("\tCongratulate!!!!");
+    printf("\nYour password : ");
+    for ( i = 0; ; ++i )
+    {
+      result = (unsigned int)i;
+      if ( i > 9 )
+        break;
+      printf("%d", (unsigned int)v5[i]);
+    }
+  }
+  else
+  {
+    printf("Key not true");
+    return 0LL;
+  }
+  return result;
+}
+```
+
+Hàm này trước khi in ra password thì cần bạn nhập key vào, phân tích 1 chút hàm này sẽ hoạt đông như sau:
+
+9 kí tự đầu của `v5` sẽ lưu 1 dãy số gì đó:
+
+```v5[i] = (int)(a * keypublic[i] + a1) % v3;```
+
+9 kí tự ở giữa sẽ lưu key các bạn nhập vào:
+
+```c
+for ( i = 0; i <= 9; ++i )
+  {
+    __isoc99_scanf("%2d", &v5[i + 12]);
+    putchar(10);
+  }
+```
+9 kí tự ở cuối sẽ là nơi chứa key sau khi mã hóa, và được so sánh với public key có sẵn:
+
+```c
+for ( i = 0; i <= 9; ++i )
+    v5[i + 24] = v4 * (v5[i + 12] - a1) % v3;
+  for ( i = 0; i <= 9; ++i )
+    v2 = v5[i + 24] == keypublic[i];
+```
+Nếu đúng hết thì nó sẽ in password ra, mà password lại là 9 kí tự đầu của v5 =)))
+
+Nên là khúc này mình chỉ cần chạy hết đoạn này, xong lấy pass ra thôi:))
+
+```c
+for ( i = 0; i <= 9; ++i )
+  {
+    v5[i] = (int)(a * keypublic[i] + a1) % v3;
+    printf("%d\n", keypublic[i]);
+  }
+```
+![image](https://user-images.githubusercontent.com/88520787/176380198-0142d478-c827-4886-8aa6-93fbe6c3bb8b.png)
+
+Lấy 9 số đầu chuyển thành decimal và nối lại thì mình được password: `76725167175623`
+
+Lúc đầu mình nhập vào thì không đc, sau khi ib hỏi admin và thảo luận 1 hồi lâu thì admin mới sửa lại và có đc flag, rồi tới đây mìnht thấy cái netcat nó cứ sao sao, không biết nó giúp gì trong trường hợp này =))
+
+Nhập pass và get flag:
+
+![image](https://user-images.githubusercontent.com/88520787/176380588-754d84d2-b3a8-47f2-9f12-892de9e424e6.png)
+
+Flag: `Whitehat{I_n33d_v1t4m1n_s34}`
+
+## re07-flagcheck - 64pts
+
+![image](https://user-images.githubusercontent.com/88520787/176381355-a6890ae7-0b84-425b-919f-06f7cd7d7d56.png)
+
+Sau khi mình enter thì nó mất tiêu luôn
+
+![image](https://user-images.githubusercontent.com/88520787/176381394-dc08a6e2-8e06-464d-af9e-8b7ca7f4b161.png)
+
+```c
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  FILE *v3; // rax
+  char Buffer[48]; // [rsp+20h] [rbp-60h] BYREF
+  char cipher[44]; // [rsp+50h] [rbp-30h] BYREF
+  unsigned int i; // [rsp+7Ch] [rbp-4h]
+
+  _main();
+  qmemcpy(cipher, "Vjjp`Nf|roqSua}Ow}aKg%H{q{wpxpxE~mLTX", 37);
+  printf("Input flag: ");
+  v3 = __iob_func();
+  fgets(Buffer, 38, v3);
+  for ( i = 0; i <= 0x24; ++i )
+    Buffer[i] ^= (_BYTE)i + 1;
+  for ( i = 0; i <= 0x24; ++i )
+  {
+    if ( Buffer[i] != cipher[i] )
+    {
+      puts("Incorrect flag!");
+      return 0;
+    }
+  }
+  puts("\nCongratulation! You have flag.");
+  return 1;
+}
+```
+Bài này khá cơ bản, sau khi nhập input thì nó sẽ lấy input của mình `xor` với lại index của kí tự đó + 1, tới đây thì không nói nhiều nữa viết script luôn:
+
+```py
+t = "Vjjp`Nf|roqSua}Ow}aKg%H{q{wpxpxE~mLTX"
+for i in range(len(t)):
+    print(chr((i+1)^ord(t[i])),end = "") #WhiteHat{ez_xor_for_r3_challenge_Oop}
+```
+Flag: `WhiteHat{ez_xor_for_r3_challenge_Oop}`
