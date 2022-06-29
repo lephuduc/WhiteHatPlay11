@@ -258,7 +258,7 @@ int __fastcall sub_10001EC0(const char *a1, _BYTE *a2)
   }
 }
 ```
-Cụ thể thì hàm này chỉ là `xor` từng kí tự input với lại 0x11
+Cụ thể thì hàm này chỉ là `xor` từng kí tự input với lại 0x11 và cộng thêm 11
 
 Tại dòng 119, ta sẽ thấy đoạn check 36 kí tự đầu:
 
